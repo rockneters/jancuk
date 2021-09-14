@@ -1,20 +1,5 @@
 #!/bin/bash
 clear
-echo -e "\033[1;33m[!] \033[1;32mPERSIAPAN INSTALL V2RAY \033[1;33m[!]\033[0m"
-sleep 3
-mkdir /etc/v2ray
-mkdir /var/lib/rocknet;
-echo "Persiapkan domain anda terlebih dahulu !!"
-echo "Masukkan Domain Anda, Jika Anda Tidak Memiliki Domain pilih N"
-echo "Apakah Anda sudah mempersiapkan Host/Domain?"
-    read -p "Hostname / Domain: " host
-	echo "IP=$host" >> /var/lib/rocknet/ipvps.conf
-	echo "$host" >> /etc/v2ray/domain
-	echo ""
-    echo -e "Host/Domain berhasil di input"
-sleep 3
-cd
-
 domain=$(cat /etc/v2ray/domain)
 apt install iptables iptables-persistent -y
 apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 

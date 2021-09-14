@@ -288,7 +288,7 @@ comp-lzo
 verb 3
 END
 
-sed -i $MYIP2 /etc/openvpn/client-tcp-ssl.ovpn;
+sed -i $MYIP2 /etc/openvpn/client-tcp-ssl.ovpn
 
 cd
 # pada tulisan xxx ganti dengan alamat ip address VPS anda 
