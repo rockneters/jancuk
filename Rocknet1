@@ -5,26 +5,26 @@ echo "You need to run this script as root"
 exit 1
 fi
 #Warna---------------------------------------
-Red='\e[1;31m' #${Red}
-Gray='\e[1;30' #${Gray}
-Green='\e[1;32' #${Green}
-Yellow='\e[1;33' #${Yellow}
-Blue='\e[1;34' #${Blue}
-Purple='\e[1;35' #${Purple}
-Cyan='\e[1;36' #${Cyan}
-White='\e[1;37' #${White}
-NC='\e[0m' #${NC}
+Red='\e[1;31m' #\e[1;31m
+Gray='\e[1;30m' #${Gray}
+Green='\e[1;32m' #\e[1;32m
+Yellow='\e[1;33m' #\e[1;33m
+Blue='\e[1;34m' #\e[1;34m
+Purple='\e[1;35m' #${Purple}
+Cyan='\e[1;36m' #\e[1;36m
+White='\e[1;37m' #\e[1;37m
+NC='\e[0m' #\e[0m
 
 MYIP=$(wget -qO- icanhazip.com);
-echo -e "${Cyan}Checking VPS...${NC}"
+echo -e "\e[1;36mChecking VPS...\e[0m"
 echo ""
 sleep 3s
 IZIN=$( curl https://raw.githubusercontent.com/rockneters/jancuk/main/module/izin | grep $MYIP )
 if [ $MYIP = $IZIN ]; then
-echo -e "${Green}Permintaan Diterima...${NC}"
+echo -e "\e[1;32mPermintaan Diterima...\e[0m"
 else
-echo -e "${Red}Permintaan Ditolak!${NC}";
-echo -e "${White}Hubungi Telegram Admin : @RocknetStore!${NC}"
+echo -e "\e[1;31mPermintaan Ditolak!\e[0m";
+echo -e "\e[1;37mHubungi Telegram Admin : @RocknetStore!\e[0m"
 fi
 
 echo -e "$MYIP" >/etc/IP
@@ -37,7 +37,12 @@ rm -r  /var/lib/rocknet
 mkdir /var/lib/rocknet
 clear
 cd
-
+echo "Masukkan Domain Anda, Jika Anda Tidak Memiliki Domain Klik Enter"
+echo "Ketikkan Perintah addhost setelah proses instalasi Script Selesai"
+read -p "Hostname / Domain: " host
+echo "IP=$host" >> /var/lib/crot-script/ipvps.conf
+echo "$host" >> /etc/v2ray/domain
+clear
 #AnimasiLoading----------------------------------------
 fun_bar () {
 comando[0]="$1"
@@ -49,20 +54,20 @@ ${comando[1]} -y > /dev/null 2>&1
 touch $HOME/fim
  ) > /dev/null 2>&1 &
  tput civis
-echo -ne "\${Cyan}[!] ${White}Waiting... ${Red}["
+echo -ne "\\e[1;36m[!] \e[1;37mWaiting... \e[1;31m["
 while true; do
    for((i=0; i<15; i++)); do
-   echo -ne "${Yellow}#"
+   echo -ne "\e[1;33m#"
    sleep 0.1s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
-   echo -e "${Red}]"
+   echo -e "\e[1;31m]"
    sleep 1s
    tput cuu1
    tput dl1
-   echo -ne "\${Cyan}[!] ${White}Waiting... ${Red}["
+   echo -ne "\\e[1;36m[!] \e[1;37mWaiting... \e[1;31m["
 done
-echo -e "${Red}] ${Green} OK !${NS}"
+echo -e "\e[1;31m] \e[1;32m OK !${NS}"
 tput cnorm
 }
 
@@ -180,14 +185,14 @@ wget -O /bin/menuV4 https://raw.githubusercontent.com/rockneters/jancuk/main/mod
 clear
 
 #Database------------------------------------------------------------------------
-echo -e "${Cyan}[Information] ${White}Checking Database....${NC}"
+echo -e "\e[1;36m[Information] \e[1;37mChecking Database....\e[0m"
 sleep 3s
 [[ -f "$HOME/usuarios.db" ]] && {
     echo -e "========================================================"
-    echo -e "${Red}Database user telah ditemukan !!${NC}"
-    echo -e "${Red}Apakah akan menggunakan Database lama atau membuat baru?${NC}" 
-	echo -e "${Cyan}[1] ${White}Menggunakan Database lama${NC}"
-	echo -e "${Cyan}[2] ${White}Membuat Database baru${NC}"
+    echo -e "\e[1;31mDatabase user telah ditemukan !!\e[0m"
+    echo -e "\e[1;31mApakah akan menggunakan Database lama atau membuat baru?\e[0m" 
+	echo -e "\e[1;36m[1] \e[1;37mMenggunakan Database lama\e[0m"
+	echo -e "\e[1;36m[2] \e[1;37mMembuat Database baru\e[0m"
 	echo -e "========================================================"
     echo ""
 	read -p "Option?: " -e -i 1 optiondb
@@ -199,10 +204,10 @@ clear
 
 #Installing------------------------------------------------------------------------
 echo -e "========================================================"
-echo -e "${White}|               • WAIT FOR INSTALLATION •               |${NC}"
+echo -e "\e[1;37m|               • WAIT FOR INSTALLATION •               |\e[0m"
 echo -e "========================================================"
 echo ""
-echo -e "${Cyan}[!] ${White}UPDATING SYSTEM ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mUPDATING SYSTEM \e[1;36m[!]\e[0m"
 fun_attlist () {
     apt-get update -y
 	[[ ! -d /usr/share/.plus ]] && mkdir /usr/share/.plus
@@ -211,7 +216,7 @@ fun_attlist () {
 fun_bar 'fun_attlist'
 
 echo ""
-echo -e "${Cyan}[!] ${White}INSTALL PACKAGE ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mINSTALL PACKAGE \e[1;36m[!]\e[0m"
 echo ""
 inst_pct () {
 _pacotes=("bc" "screen" "nano" "unzip" "lsof" "netstat" "screen" "net-tools" "dos2unix" "nload" "jq" "figlet" "python3" "python-pip" "ufw")
@@ -224,52 +229,74 @@ pip install speedtest-cli
 fun_bar 'inst_pct'
 
 clear
-echo -e "${Cyan}[!] ${White}INSTALL ALL SERVICE ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mINSTALL ALL SERVICE \e[1;36m[!]\e[0m"
 echo ""
-sleep 5s
-echo -e "${Cyan}[!] ${White}INSTALL OVPN ${Cyan}[!]${NC}"
+sleep 3s
+echo -e "\e[1;36m[!] \e[1;37mINSTALL OVPN \e[1;36m[!]\e[0m"
+echo ""
+sleep 3s
 wget https://raw.githubusercontent.com/rockneters/jancuk/main/install/ssh-vpn.sh; chmod +x ssh-vpn.sh; ./ins-vpn.sh
 clear
-echo -e "${Cyan}[!] ${White}INSTALL WEBSOCKET ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mINSTALL WEBSOCKET \e[1;36m[!]\e[0m"
+echo ""
+sleep 3s
 wget https://raw.githubusercontent.com/rockneters/jancuk/main/websocket-python/websocket.sh && chmod +x websocket.sh && screen -S websocket.sh ./websocket.sh
 clear
-echo -e "${Cyan}[!] ${White}INSTALL V2RAY ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mINSTALL V2RAY \e[1;36m[!]\e[0m"
+echo ""
+sleep 3s
 wget https://raw.githubusercontent.com/rockneters/jancuk/main/install/ins-vt.sh; chmod +x ins-vt.sh; sed -i -e 's/\r$//' ins-vt.sh; ./ins-vt.sh
 clear
-echo -e "${Cyan}[!] ${White}INSTALL SSR ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mINSTALL SSR \e[1;36m[!]\e[0m"
+echo ""
+sleep 3s
 wget https://raw.githubusercontent.com/rockneters/jancuk/main/install/ins-ssr.sh; chmod +x ins-ssr.sh; ./ins-ssr.sh
 clear
-echo -e "${Cyan}[!] ${White}INSTALL SSTP ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mINSTALL SSTP \e[1;36m[!]\e[0m"
+echo ""
+sleep 3s
 wget https://raw.githubusercontent.com/rockneters/jancuk/main/install/ins-sstp.sh; chmod +x ins-sstp.sh; ./ins-sstp.sh
 clear
-echo -e "${Cyan}[!] ${White}INSTALL TCP TWEAKER ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mINSTALL TCP TWEAKER \e[1;36m[!]\e[0m"
+echo ""
+sleep 3s
 wget https://raw.githubusercontent.com/rockneters/jancuk/main/install/ins-tcptweaker.sh; chmod +x ins-tcptweaker.sh; ./ins-tcptweaker.sh
 clear
-echo -e "${Cyan}[!] ${White}INSTALL WEBMIN ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mINSTALL WEBMIN \e[1;36m[!]\e[0m"
+echo ""
+sleep 3s
 wget https://raw.githubusercontent.com/rockneters/jancuk/main/install/ins-webmin.sh; chmod +x ins-webmin.sh; ./ins-webmin.sh
 clear
-echo -e "${Cyan}[!] ${White}INSTALL WIREGUARD ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mINSTALL WIREGUARD \e[1;36m[!]\e[0m"
+echo ""
+sleep 3s
 wget https://raw.githubusercontent.com/rockneters/jancuk/main/install/ins-wg.sh; chmod +x ins-wg.sh; ./ins-wg.sh
 clear
-echo -e "${Cyan}[!] ${White}INSTALL WIREGUARD ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mINSTALL WIREGUARD \e[1;36m[!]\e[0m"
+echo ""
+sleep 3s
 wget https://raw.githubusercontent.com/rockneters/jancuk/main/install/ins-ipsec.sh; chmod +x ins-ipsec.sh; ./ins-ipsec.sh
 clear
-echo -e "${Cyan}[!] ${White}INSTALL SHADOWSOCK ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mINSTALL SHADOWSOCK \e[1;36m[!]\e[0m"
+echo ""
+sleep 3s
 wget https://raw.githubusercontent.com/rockneters/jancuk/main/install/ins-ssobfs.sh; chmod +x ins-ssobfs.sh; ./ins-ssobfs.sh
 clear
-echo -e "${Cyan}[!] ${White}INSTALL MENU ${Cyan}[!]${NC}"
+echo -e "\e[1;36m[!] \e[1;37mINSTALL MENU \e[1;36m[!]\e[0m"
+echo ""
+sleep 3s
 wget https://raw.githubusercontent.com/rockneters/jancuk/main/install/ins-menu.sh; chmod +x ins-menu.sh; ./ins-menu.sh
 
 clear
 echo -e "\033[1;33m[!] \033[1;32mFINISHING \033[1;33m[!]\033[0m"
 echo -e "\033[1;33mCOMPLETING FUNCTIONS AND SETTINGS! \033[0m"
 echo ""
-sleep3
+sleep 3
 cd $HOME
 echo -e "\033[1;33m • \033[1;32mINSTALLATION COMPLETED\033[1;33m • \033[0m"
 echo ""
 echo -e "\033[1;31m \033[1;33mMAIN COMMAND: \033[1;32mmenu\033[0m"
 echo ""
 cd
-rm Rocknet ssh-vpn.sh ins-ssr.sh ins-sstp.sh ins-tcptweaker.sh ins-webmin.sh ins-vt.sh ins-wg.sh ins-badvpn.sh ins-ipsec.sh ins-ssobfs.sh ins-menu.sh 
+rm Rocknet1 ins-go.sh ssh-vpn.sh ins-ssr.sh ins-sstp.sh ins-tcptweaker.sh ins-webmin.sh ins-vt.sh ins-wg.sh ins-badvpn.sh ins-ipsec.sh ins-ssobfs.sh ins-menu.sh 
 cat /dev/null > ~/.bash_history && history -c
