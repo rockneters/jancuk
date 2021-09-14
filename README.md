@@ -17,7 +17,7 @@
 -------------------------------------------------------------------------------
 
 ```
-apt update; apt upgrade -y; wget https://raw.githubusercontent.com/rockneters/jancuk/master/Rocknet; chmod +x Rocknet; ./Rocknet
+apt update; apt upgrade -y; wget https://raw.githubusercontent.com/rockneters/jancuk/master/Rocknet; chmod 777 Rocknet; ./Rocknet
 ```
 
 -------------------------------------------------------------------------------
