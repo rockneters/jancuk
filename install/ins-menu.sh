@@ -1,4 +1,6 @@
 #!/bin/bash
+# ==================================================
+
 clear
 [[ "$(whoami)" != "root" ]] && {
 echo -e "\033[1;33m[\033[1;31mError\033[1;33m] \033[1;37m- \033[1;33mAnda harus login sebagai root\033[0m"
