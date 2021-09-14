@@ -33,10 +33,10 @@ chronyc tracking -v
 date
 # install v2ray
 GitUser="https://raw.githubusercontent.com/rockneters/jancuk/main"
-wget ${GitUser}/install/go.sh && chmod +x go.sh && ./go.sh
+wget https://raw.githubusercontent.com/rockneters/jancuk/main/install/ins-go.sh && chmod +x go.sh && ./go.sh
 rm -f /root/go.sh
 mkdir /root/.acme.sh
-curl ${GitUser}/install/acme.sh -o /root/.acme.sh/acme.sh
+curl https://raw.githubusercontent.com/rockneters/jancuk/main/install/acme.sh -o /root/.acme.sh/acme.sh
 chmod +x /root/.acme.sh/acme.sh
 /root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
 ~/.acme.sh/acme.sh --install-cert -d $domain --fullchainpath /etc/v2ray/v2ray.crt --keypath /etc/v2ray/v2ray.key --ecc
