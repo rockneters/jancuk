@@ -10,7 +10,7 @@ MYIP=$(wget -qO- ipv4.icanhazip.com);
 MYIP2="s/xxxxxxxxx/$MYIP/g";
 ANU=$(ip -o $ANU -4 route show to default | awk '{print $5}');
 
-#${GitUser}
+#https://raw.githubusercontent.com/rockneters/jancuk/main
 GitUser="https://raw.githubusercontent.com/rockneters/jancuk/main"
 
 # Install OpenVPN dan Easy-RSA
@@ -22,7 +22,7 @@ cp /etc/openvpn/easy-rsa/vars.example /etc/openvpn/easy-rsa/vars
 
 # Kemudian edit file variabel easy-rsa
 # nano /etc/openvpn/easy-rsa/vars
-wget -O /etc/openvpn/easy-rsa/vars "${GitUser}/install/vars.conf"
+wget -O /etc/openvpn/easy-rsa/vars "https://raw.githubusercontent.com/rockneters/jancuk/main/module/vars.conf"
 # edit projek export KEY_NAME="vpn"
 # Save dan keluar dari editor
 
