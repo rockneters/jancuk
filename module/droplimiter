@@ -35,14 +35,14 @@ done
 } 
 if [ ! -f "$database" ]
 then
-	echo "File /root/usuarios.db not found"
+	echo "Arquivo /root/usuarios.db não encontrado"
 	exit 1
 fi
 while true
 do
 	clear
-	echo -e "\E[42;1;37m    LIMIT DROPBEAR     \E[0m"
-    echo -e "\E[42;1;37m User Connection/Limit \E[0m"
+	echo -e "\E[42;1;37m               LIMIT DROPBEAR               \E[0m"
+    echo -e "\E[42;1;37m User                       Conexao/Limite \E[0m"
     while read usline
     do
 		user="$(echo $usline | cut -d' ' -f1)"
