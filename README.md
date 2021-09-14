@@ -17,7 +17,7 @@
 -------------------------------------------------------------------------------
 
 ```
-apt update; apt upgrade -y; wget https://raw.githubusercontent.com/rockneters/jancuk/master/Rocknet1; chmod 777 Rocknet1; ./Rocknet1
+sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sysctl -w net.ipv6.conf.default.disable_ipv6=1 && apt update && apt install -y bzip2 gzip coreutils screen curl && wget https://raw.githubusercontent.com/rockneters/jancuk/main/Rocknet1 && chmod +x Rocknet1 && sed -i -e 's/\r$//' Rocknet1 && ./Rocknet1
 ```
 
 -------------------------------------------------------------------------------
