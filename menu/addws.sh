@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 IP=$(cat /etc/IP)
-source /var/lib/crot-script/ipvps.conf
+source /var/lib/rocknet/ipvps.conf
 if [[ "$IP" = "" ]]; then
 domain=$(cat /etc/v2ray/domain)
 else
@@ -69,7 +69,7 @@ echo -e "==========-V2RAY/VMESS-=========="
 echo -e "Remarks        : ${user}"
 echo -e "Domain         : ${domain}"
 echo -e "Server IP      : $PUBLIC_IP"
-echo -e "port TLS       : 4443"
+echo -e "port TLS       : 443"
 echo -e "port none TLS  : 80"
 echo -e "id             : ${uuid}"
 echo -e "alterId        : 2"
