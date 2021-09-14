@@ -6,17 +6,14 @@ mkdir /etc/v2ray
 mkdir /var/lib/rocknet;
 echo "Persiapkan domain anda terlebih dahulu !!"
 echo "Masukkan Domain Anda, Jika Anda Tidak Memiliki Domain pilih N"
-echo "Apakah Anda sudah mempersiapkan Host/DOmain [y/N]?"
-    [yY][eE][sS] | [yY])
+echo "Apakah Anda sudah mempersiapkan Host/Domain?"
     read -p "Hostname / Domain: " host
 	echo "IP=$host" >> /var/lib/rocknet/ipvps.conf
 	echo "$host" >> /etc/v2ray/domain
 	echo ""
     echo -e "Host/Domain berhasil di input"
-		;;
-    *) ;;
-	esac
-	cd
+sleep 3
+cd
 
 domain=$(cat /etc/v2ray/domain)
 apt install iptables iptables-persistent -y
